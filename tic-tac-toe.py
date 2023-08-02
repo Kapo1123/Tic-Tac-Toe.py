@@ -16,8 +16,8 @@ def game():
     who_is_player = "" #show whose turn
     player_name =""
     while True:
-        if who_is_player == "computer":
-            who_is_player = player_name
+        # if who_is_player == "computer":
+        #     who_is_player = player_name
         elif who_is_player != "":
             who_is_player= "computer"
         show_map(map)
