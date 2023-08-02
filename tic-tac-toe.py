@@ -4,13 +4,43 @@ def show_map(map):
         print(" | ".join(line))
     print("-"*9)
 def check_win(map, x =3, y = 3):
-    i=0
-    const_three_x = 0
-    const_three_y = 0
+    row_number=0
+    column_number =0
+    const_three_x_horizontal = 0
+    const_three_x_vertical =0
+    const_three_y_horizontal = 0
+    const_three_y_vertical =0
     # check if player win
-    for i in range (x):
-        if map[0][i] == "x":
-
+    #first way to win for player
+    for row_number in range (x):
+        for column_number in range (y):
+            if map[row_number][column_number] == "x":
+                const_three_x_vertical +=1
+                if const_three_x_vertical == 3:
+                    return "player"
+            if map[column_number][row_number] == "x":
+                const_three_x_horizontal +=1
+                if const_three_x_horizontal == 3:
+                    return "player"
+            if map[row_number][column_number] == "o":
+                const_three_x_vertical = 0
+            if map[column_number][row_number] == "o":
+                const_three_x_horizontal = 0   
+    #second way to win for player
+    for row_number in range (x):
+        for column_number in range (y):
+            if map[row_number][column_number] == "x":
+                const_three_y_vertical +=1
+                if const_three_y_vertical == 3:
+                    return "computer"
+            if map[column_number][row_number] == "x":
+                const_three_y_horizontal +=1
+                if const_three_y_horizontal == 3:
+                    return "computer"
+            if map[row_number][column_number] == "o":
+                const_three_y_vertical = 0
+            if map[column_number][row_number] == "o":
+                const_three_y_horizontal = 0   
     
         
 def game():
@@ -24,7 +54,7 @@ def game():
     # player = "x"
     # computer = "o"
     who_is_player = "" #show whose turn
-    player_name =""
+    player_name = ""
     played = False
     while True:
         if who_is_player == "computer":
@@ -34,11 +64,28 @@ def game():
             who_is_player= "computer"
             played = False
         show_map(map)
+        answer = check_win(map,length, depth )           
+        if answer == "player":
+            print ("Congratulations!! You won")
+            still_play =input(f"Do you still want to play? Y/N : ")
+            if still_play == "N":
+                break
+            if still_play == "Y":
+                game()
+            
+        elif answer == "computer":
+            print ("Do better next time!")
+            still_play =input(f"Do you still want to play? Y/N : ")
+            if still_play == "N":
+                exit
+            if still_play == "Y":
+                game()
+        
         while who_is_player == "":
             print("Welcome to the game! In this game, you will be playing against a computer!")
             player_name = input(f"May I have your name:" )
             x = str(input(f"Do you want {player_name} to go first or computer go first? "))
-            name = {player_name:"x", "computer": "y" }
+            name = {player_name:"x", "computer": "o" }
             who_is_player = x.lower()
         while played == False:
             if who_is_player == "computer":
@@ -61,12 +108,13 @@ def game():
                     map[row][column] = name[player_name]
                     played = True
                     break
-        if check_win(map,length, depth ) == "player":
-            print ("Congratulations!! You won")
-        elif check_win(map,length, depth ) == "computer":
-            print ("Do better next time!")
-        elif check_tie(map,length, depth) == True:
-            print ("It's a tie ")
+        # answer = check_win(map,length, depth )           
+        # if answer == "player":
+        #     print ("Congratulations!! You won")
+        # elif answer == "computer":
+        #     print ("Do better next time!")
+        # elif check_tie(map,length, depth) == True:
+        #     print ("It's a tie ")
 if __name__ == "__main__":
     game()
             
