@@ -13,35 +13,39 @@ def check_win(map, x =3, y = 3):
         # check if player win
         #first way to win for player
         for row_number in range (x):
+            const_three_x_horizontal = 0
+            const_three_x_vertical = 0 
             for column_number in range (y):
                 if map[row_number][column_number] == "o":
-                    const_three_x_vertical = 0
+                    const_three_x_horizontal = 0
                 if map[column_number][row_number] == "o":
-                    const_three_x_horizontal = 0  
+                    const_three_x_vertical = 0  
                 if map[row_number][column_number] == "x":
-                    const_three_x_vertical +=1
-                    if const_three_x_vertical == 3:
-                        return "player" 
-                if map[column_number][row_number] == "x":
                     const_three_x_horizontal +=1
                     if const_three_x_horizontal == 3:
+                        return "player" 
+                if map[column_number][row_number] == "x":
+                    const_three_x_vertical +=1
+                    if const_three_x_vertical == 3:
                         return "player"
                 # if map[row_number][column_number] == "o":
                 #     const_three_x_vertical = 0
                 # if map[column_number][row_number] == "o":
                 #     const_three_x_horizontal = 0   
-        #second way to win for player
+        #check computer
         for row_number in range (x):
+            const_three_y_vertical = 0
+            const_three_y_horizontal = 0   
             for column_number in range (y):
-                if map[row_number][column_number] == "o":
-                    const_three_y_vertical = 0
-                if map[column_number][row_number] == "o":
-                    const_three_y_horizontal = 0   
                 if map[row_number][column_number] == "x":
+                    const_three_y_vertical = 0
+                if map[column_number][row_number] == "x":
+                    const_three_y_horizontal = 0   
+                if map[row_number][column_number] == "o":
                     const_three_y_vertical +=1
                     if const_three_y_vertical == 3:
                         return "computer"
-                if map[column_number][row_number] == "x":
+                if map[column_number][row_number] == "o":
                     const_three_y_horizontal +=1
                     if const_three_y_horizontal == 3:
                         return "computer"
