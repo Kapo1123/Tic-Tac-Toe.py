@@ -12,47 +12,30 @@ def check_win(map, x =3, y = 3):
         const_three_y_vertical =0
         # check if player win
         #first way to win for player
+        if map[0][0] == map[1][1] == map[2][2] and (map[0][0] == "x" or map[0][0] == "o"):
+            return "player" if map[0][0] == "x" else "computer"
+        if map[0][2] == map[1][1] == map[2][0] and (map[0][2] == "x" or map[0][2] == "o"):
+            return "player" if map[0][2] == "x" else "computer"
         for row_number in range (x):
             const_three_x_horizontal = 0
             const_three_x_vertical = 0 
+            const_three_y_horizontal = 0
+            const_three_y_vertical =0
             for column_number in range (y):
-                if map[row_number][column_number] == "o":
-                    const_three_x_horizontal = 0
-                if map[column_number][row_number] == "o":
-                    const_three_x_vertical = 0  
                 if map[row_number][column_number] == "x":
                     const_three_x_horizontal +=1
-                    if const_three_x_horizontal == 3:
-                        return "player" 
+                elif map[row_number][column_number] == "y":
+                    const_three_y_horizontal +=1
                 if map[column_number][row_number] == "x":
                     const_three_x_vertical +=1
-                    if const_three_x_vertical == 3:
-                        return "player"
-                # if map[row_number][column_number] == "o":
-                #     const_three_x_vertical = 0
-                # if map[column_number][row_number] == "o":
-                #     const_three_x_horizontal = 0   
-        #check computer
-        for row_number in range (x):
-            const_three_y_vertical = 0
-            const_three_y_horizontal = 0   
-            for column_number in range (y):
-                if map[row_number][column_number] == "x":
-                    const_three_y_vertical = 0
-                if map[column_number][row_number] == "x":
-                    const_three_y_horizontal = 0   
-                if map[row_number][column_number] == "o":
+                elif map[column_number][row_number] == "y":
                     const_three_y_vertical +=1
-                    if const_three_y_vertical == 3:
-                        return "computer"
-                if map[column_number][row_number] == "o":
-                    const_three_y_horizontal +=1
-                    if const_three_y_horizontal == 3:
-                        return "computer"
-                # if map[row_number][column_number] == "o":
-                #     const_three_y_vertical = 0
-                # if map[column_number][row_number] == "o":
-                #     const_three_y_horizontal = 0   
+                if const_three_x_vertical ==3 or const_three_x_horizontal ==3:
+                    return "player"
+                elif const_three_y_vertical ==3  or const_three_y_horizontal ==3:
+                    return "computer"
+        #check computer
+        
 def check_tie(map, x =3, y = 3):
         row_number=0
         column_number =0
